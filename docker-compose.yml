@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  memcached:
+    build: .
+    image: memcached-sals:latest
+    environment:
+      - MEMCACHED_USERNAME=${MEMCACHED_USERNAME:-myuser}
+      - MEMCACHED_PASSWORD=${MEMCACHED_PASSWORD:-mypassword}
+    ports:
+      - "11211:11211" 
