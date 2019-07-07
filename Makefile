@@ -1,6 +1,7 @@
 
 SHELL = /bin/bash
 TAG = latest
+IMAGE := ${DOCKER_USERNAME}/memcached-sasl:${TAG}
 
 build:
 	docker build --tag memcached-sasl:${TAG} .
@@ -15,6 +16,10 @@ push:
 	docker build --tag memcached-sasl:${TAG} .
 	docker tag memcached-sasl:${TAG} "${AWS_ACCOUNT_ID}.dkr.ecr.${region}.amazonaws.com/memcached-sasl:${TAG}"
 	docker push "${AWS_ACCOUNT_ID}.dkr.ecr.${region}.amazonaws.com/memcached-sasl:${TAG}"
+
+dpush:
+	docker tag memcached-sasl:${TAG} ${IMAGE}
+	docker push ${IMAGE}
 
 clean:
 	docker stop memcached-sasl
